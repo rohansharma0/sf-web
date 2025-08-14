@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import Auth from "../componets/Auth/Auth";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 type ForgotPasswordInputs = {
     email: string;
@@ -12,7 +12,6 @@ const ForgotPassword = () => {
         register,
         handleSubmit,
         formState: { errors },
-        reset,
     } = useForm<ForgotPasswordInputs>();
 
     const onSubmit = (data: ForgotPasswordInputs) => {

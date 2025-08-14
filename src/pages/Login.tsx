@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Auth from "../componets/Auth/Auth";
 import { authService } from "../services/authServices";
 import { useAuth } from "../context/AuthContex";
@@ -54,11 +54,6 @@ const Login = () => {
         }
     };
 
-    const handleGoogleLogin = () => {
-        console.log("Google login clicked");
-        // Call Google auth flow
-    };
-
     return (
         <Auth>
             <h2 className="auth-title">Login.</h2>
@@ -110,11 +105,6 @@ const Login = () => {
                 <button type="submit" className="auth-form-button">
                     Sign in
                 </button>
-                {/* <button
-                    onClick={handleGoogleLogin}
-                    className="auth-form-button">
-                    Login with Google
-                </button> */}
             </form>
             <Link className="auth-form-outline-button" to="/auth/register">
                 Don't have an account yet? Create account
