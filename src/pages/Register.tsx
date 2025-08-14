@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import Auth from "../componets/Auth/Auth";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContex";
 import { authService } from "../services/authServices";
 
