@@ -11,6 +11,7 @@ export const AddressFormGroup = styled.div`
         padding: 0.85rem;
         font-size: 0.9rem;
         width: 100%;
+        border-radius: 0;
     }
 
     .address-form-error {

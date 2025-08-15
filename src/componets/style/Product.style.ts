@@ -1,14 +1,20 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const ProductContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 3rem;
-    width: 100%;
+    width: 90%;
     max-width: 1300px;
     margin: 0 auto;
     align-items: flex-start;
-    padding: 3rem 0;
+    padding: 1rem 0;
+
+    @media (${device.desktop}) {
+        padding: 3rem 0;
+        width: 100%;
+    }
 
     .product-images-container {
         flex: 1.7;

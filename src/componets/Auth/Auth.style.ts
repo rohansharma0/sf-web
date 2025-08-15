@@ -29,6 +29,7 @@ export const AuthSection = styled.section`
         font-weight: 700;
         text-transform: capitalize;
         text-align: center;
+        width: 100%;
     }
 
     .auth-form {
@@ -58,6 +59,7 @@ export const AuthSection = styled.section`
         padding: 0.85rem;
         font-size: 0.9rem;
         width: 100%;
+        border-radius: 0;
     }
     .auth-form-button {
         border: 1px solid #000000ff;

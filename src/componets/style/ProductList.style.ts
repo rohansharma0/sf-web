@@ -1,14 +1,20 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const ProductListSection = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 100%;
+    width: 90%;
     max-width: 1300px;
     margin: 0 auto;
     align-items: center;
-    padding: 3rem 0;
+    padding: 1rem 0;
+
+    @media (${device.desktop}) {
+        padding: 3rem 0;
+        width: 100%;
+    }
 
     .product-list-title {
         width: 100%;
@@ -20,11 +26,16 @@ export const ProductListSection = styled.div`
 export const ProductListHeader = styled.div`
     background: #6e6e6e;
     width: 100%;
-    height: 35vh;
+    height: 25vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+
+    @media (${device.desktop}) {
+        height: 35vh;
+        margin-bottom: 2rem;
+    }
 `;
 
 export const ProductListHeaderContent = styled.div`   
@@ -109,17 +120,26 @@ export const ProductListFilterTopWrapper = styled.div`
 
 export const ProductListContainer = styled.div<{ view: "grid" | "list" }>`
     width: 100%;
-    gap: 2rem;
 
     ${({ view }) =>
         view === "grid"
             ? `
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(1, 1fr);
+                gap: 2rem;
+                
+                @media(${device.desktop}){
+                    grid-template-columns: repeat(3, 1fr);
+                }
               `
             : `
                 display: flex;
                 flex-direction: column;
+                gap: 1rem;
+
+                @media(${device.desktop}){
+                    gap: 2rem;
+                }
               `}
 `;
 

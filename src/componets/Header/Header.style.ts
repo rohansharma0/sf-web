@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const NavBarContainer = styled.nav`
     display: flex;
@@ -85,11 +86,17 @@ export const NavBarContainer = styled.nav`
     }
 
     .nav-wrapper {
-        width: 100%;
+        width: 90%;
         height: 100%;
         margin: 0 auto;
         max-width: 1500px;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media (${device.desktop}) {
+            width: 100%;
+        }
 
         .nav-items-ul {
             flex: 1;
@@ -142,9 +149,38 @@ export const NavBarContainer = styled.nav`
         display: flex;
         align-items: center;
         justify-content: center;
-        flex: 1;
+
+        @media (${device.desktop}) {
+            flex: 1;
+        }
+
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            gap: 5px;
+            padding: 5px;
+            cursor: pointer;
+            margin-right: 16px;
+
+            @media (${device.desktop}) {
+                width: 24px;
+            }
+
+            .menu-line {
+                height: 2px;
+                background: #000;
+                border-radius: 2px;
+                width: 24px;
+                display: block;
+                transform-origin: center;
+            }
+        }
 
         .nav-logo-img {
+            margin-top: 2px;
             transition: height 0.2s ease-in-out;
         }
     }
@@ -152,9 +188,13 @@ export const NavBarContainer = styled.nav`
     .nav-icons {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        flex: 1;
+        gap: 0.25rem;
         justify-content: flex-end;
+
+        @media (${device.desktop}) {
+            flex: 1;
+            gap: 0.5rem;
+        }
 
         .icon-btn {
             background: none;
@@ -167,6 +207,10 @@ export const NavBarContainer = styled.nav`
             justify-content: center;
             align-items: center;
             transition: background 0.2s;
+            color: #000;
+
+            @media (${device.desktop}) {
+            }
         }
 
         .icon-btn:hover {

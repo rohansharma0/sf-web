@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const ProductItemContainer = styled.div<{ view: "grid" | "list" }>`
     cursor: pointer;
@@ -12,9 +13,13 @@ export const ProductItemContainer = styled.div<{ view: "grid" | "list" }>`
             gap: 1rem;
                 flex-direction: column;
               `
-            : ` gap: 2rem;
+            : ` gap: 0.75rem;
                 flex-direction: row;
                 align-items: center;
+
+                @media(${device.desktop}){
+                gap: 2rem;
+                }
               `};
 `;
 
@@ -27,23 +32,46 @@ export const ProductItemImageWrapper = styled.div<{ view: "grid" | "list" }>`
     .product-out-of-stock {
         position: absolute;
         right: 0;
-        top: 2rem;
-        font-size: 0.8rem;
         background: #858585;
         color: #fff;
-        padding: 0.5rem;
-        font-weight: 500;
+        font-weight: 400;
+        font-size: 0.5rem;
+        padding: 0.2rem;
+        top: 0.75rem;
+
+        @media (${device.desktop}) {
+            font-weight: 500;
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            top: 2rem;
+        }
     }
 
     .product-on-sale {
         position: absolute;
         right: 0;
-        top: 2rem;
-        font-size: 0.8rem;
         background: #f44336;
         color: #fff;
-        padding: 0.5rem;
-        font-weight: 500;
+
+        ${({ view }) =>
+            view === "list"
+                ? `
+                font-weight: 400;
+                font-size: 0.5rem;
+                padding: 0.2rem;
+                top: 0.75rem;
+
+                @media (${device.desktop}) {
+                    font-weight: 500;
+                    font-size: 0.8rem;
+                    padding: 0.5rem;
+                    top: 2rem;
+                }
+            `
+                : `font-weight: 500;
+                    font-size: 0.8rem;
+                    padding: 0.5rem;
+                    top: 2rem;`}
     }
 
     img {
@@ -59,8 +87,13 @@ export const ProductItemImageWrapper = styled.div<{ view: "grid" | "list" }>`
                 height: 400px;
               `
             : `
+                width: 125px;
+                height: 150px;
+
+                @media(${device.desktop}){
                 width: 200px;
                 height: 200px;
+                }
               `}
 `;
 
@@ -68,7 +101,11 @@ export const ProductItemBodyWrapper = styled.div<{ view: "grid" | "list" }>`
     display: flex;
     flex-direction: row;
     flex: 1;
-    gap: 1rem;
+    gap: 0.5rem;
+
+    @media (${device.desktop}) {
+        gap: 1rem;
+    }
 
     .product-item-details {
         flex: 1;
@@ -113,6 +150,7 @@ export const ProductItemBodyWrapper = styled.div<{ view: "grid" | "list" }>`
         gap: 0.5rem;
         align-items: flex-end;
         flex-direction: ${({ view }) => (view === "grid" ? "row" : "column")};
+        justify-content: center;
         .product-item-icon-btn {
             border: none;
             background: black;

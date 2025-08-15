@@ -16,7 +16,14 @@ a,
 a:link,
 a:visited,
 a:hover,
-a:active {
+a:active{
+  color: inherit;       /* or a fixed color like #007bff */
+  text-decoration: none; /* optional: removes underline */
+}
+
+button{
+  background: none;
+  border:none;
   color: inherit;       /* or a fixed color like #007bff */
   text-decoration: none; /* optional: removes underline */
 }

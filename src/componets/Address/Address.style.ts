@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const AddressWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: calc(50% - 1rem);
+    width: 100%;
+
     gap: 1rem;
+
+    @media (${device.desktop}) {
+        width: calc(50% - 1rem);
+    }
 
     .address-item-title {
         font-size: 1.2rem;
@@ -14,7 +20,7 @@ export const AddressWrapper = styled.div`
 `;
 
 export const AddressItem = styled.div`
-    padding: 2rem;
+    padding: 1rem;
     border: 1px solid #eee;
     width: 100%;
     display: flex;
@@ -22,6 +28,10 @@ export const AddressItem = styled.div`
     gap: 1rem;
     justify-content: space-between;
     flex-grow: 1;
+
+    @media (${device.desktop}) {
+        padding: 2rem;
+    }
 
     .address-item-content {
         display: flex;
