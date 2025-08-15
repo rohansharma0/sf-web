@@ -4,13 +4,13 @@ import {
     EditProfileDescription,
     EditProfileForm,
     EditProfileHeader,
-    EditProfileNav,
 } from "../componets/style/EditProfile.style";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+
 import { useForm } from "react-hook-form";
 import { userService } from "../services/userService";
 import { useQuery } from "@tanstack/react-query";
 import type { IUser } from "../types/User";
+import GoBackNav from "../componets/GoBackNav/GoBackNav";
 
 type UpdateFormInputs = {
     name: string;
@@ -49,10 +49,7 @@ const EditProfile = () => {
 
     return (
         <EditProfileContainer>
-            <EditProfileNav onClick={() => navigate(-1)}>
-                <KeyboardArrowLeftIcon />
-                Back to Account
-            </EditProfileNav>
+            <GoBackNav text="Back to account" onBack={() => navigate(-1)} />
             <EditProfileHeader>My Details</EditProfileHeader>
 
             <EditProfileForm onSubmit={handleSubmit(onSubmit)}>

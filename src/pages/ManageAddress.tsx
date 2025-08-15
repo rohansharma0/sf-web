@@ -3,10 +3,8 @@ import {
     AddressContainer,
     ManageAddressContainer,
     ManageAddressHeader,
-    ManageAddressNav,
 } from "../componets/style/ManageAddress.style";
 
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import type { IAddress } from "../types/Address";
 import { addressService } from "../services/addressServices";
 import { useQuery } from "@tanstack/react-query";
@@ -16,6 +14,7 @@ import Address from "../componets/Address/Address";
 import { AddressItem } from "../componets/Address/Address.style";
 import AddressForm from "../componets/EditAddressForm/AddressForm";
 import { useNavigate } from "react-router";
+import GoBackNav from "../componets/GoBackNav/GoBackNav";
 
 const ManageAddress = () => {
     const navigate = useNavigate();
@@ -104,10 +103,7 @@ const ManageAddress = () => {
 
     return (
         <ManageAddressContainer>
-            <ManageAddressNav onClick={() => navigate(-1)}>
-                <KeyboardArrowLeftIcon />
-                Back to Account
-            </ManageAddressNav>
+            <GoBackNav text="Back to account" onBack={() => navigate(-1)} />
             <ManageAddressHeader>My Addresses</ManageAddressHeader>
 
             {addressList.length === 0 && !primaryAddress ? (

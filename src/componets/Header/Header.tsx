@@ -1,6 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import type { ICategory } from "../../types/Category";
-import { categoryService } from "../../services/category.services";
+import { useQueryClient } from "@tanstack/react-query";
 import { HeaderContainer, NavBarContainer } from "./Header.style";
 import { Link, useNavigate } from "react-router";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -15,7 +13,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSystemPreferences } from "../../context/SystemPreferenceContex";
 import { SysPrefConstant } from "../../utils/SysPrefConstant";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const MotionHeaderContainer = motion(HeaderContainer);
 
@@ -26,19 +23,20 @@ const Header = () => {
 
     const { getValueByKey } = useSystemPreferences();
     const logoURL = getValueByKey(SysPrefConstant.APP_LOGO);
-    const isSaleLive = getValueByKey(SysPrefConstant.IS_SALE_LIVE);
-    const isNewArrivals = getValueByKey(SysPrefConstant.IS_NEW_ARRIVALS);
+    // const isSaleLive = getValueByKey(SysPrefConstant.IS_SALE_LIVE);
+    // const isNewArrivals = getValueByKey(SysPrefConstant.IS_NEW_ARRIVALS);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [currentScrollY, setCurrentScrollY] = useState(0);
     const [isFurnitureMenuOpen, setIsFurnitureMenuOpen] = useState(false);
-    const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+    // const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const { data: categories } = useQuery<ICategory[]>({
-        queryKey: ["categories"],
-        queryFn: () => categoryService.getAllCategories(),
-    });
+    // const { data: categories } = useQuery<ICategory[]>({
+    //     queryKey: ["categories"],
+    //     queryFn: () => categoryService.getAllCategories(),
+    // });
 
     const handleLogout = () => {
         logout();
@@ -91,7 +89,7 @@ const Header = () => {
             </AnimatePresence>
             <NavBarContainer>
                 <div className="nav-wrapper">
-                    <ul className="nav-items-ul">
+                    {/* <ul className="nav-items-ul">
                         <li
                             className="nav-items category-container"
                             onMouseEnter={() => setIsFurnitureMenuOpen(true)}
@@ -197,8 +195,35 @@ const Header = () => {
                                 </Link>
                             </li>
                         )}
-                    </ul>
+                    </ul> */}
                     <div className="nav-logo">
+                        <div
+                            className="menu-btn"
+                            onClick={() => setIsMenuOpen(!setIsMenuOpen)}>
+                            <motion.span
+                                className="menu-line"
+                                animate={{
+                                    rotate: isMenuOpen ? 45 : 0,
+                                    y: isMenuOpen ? 9 : 0,
+                                }}
+                                transition={{ duration: 0.3 }}
+                            />
+                            <motion.span
+                                className="menu-line"
+                                animate={{
+                                    opacity: isMenuOpen ? 0 : 1,
+                                }}
+                                transition={{ duration: 0.2 }}
+                            />
+                            <motion.span
+                                className="menu-line"
+                                animate={{
+                                    rotate: isMenuOpen ? -45 : 0,
+                                    y: isMenuOpen ? -5 : 0,
+                                }}
+                                transition={{ duration: 0.3 }}
+                            />
+                        </div>
                         <Link to="/">
                             <motion.img
                                 className="nav-logo-img"
@@ -209,7 +234,7 @@ const Header = () => {
                                 }}
                                 animate={{
                                     height:
-                                        currentScrollY < 100 ? "32px" : "28px",
+                                        currentScrollY < 100 ? "32px" : "25px",
                                 }}
                                 transition={{
                                     duration: 0.1,

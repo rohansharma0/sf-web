@@ -1,15 +1,21 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const ManageAddressContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin: 0 auto;
-    width: 100%;
+    width: 90%;
     max-width: 1300px;
-    padding: 3rem 0;
+    padding: 1rem 0;
     gap: 25px;
     flex: 1;
+
+    @media (${device.desktop}) {
+        width: 100%;
+        padding: 3rem 0;
+    }
 
     .add-address-btn {
         background-color: #000000ff;
@@ -27,17 +33,12 @@ export const ManageAddressContainer = styled.div`
 `;
 
 export const ManageAddressHeader = styled.h3`
-    font-size: 37px;
+    font-size: 35.2px;
     font-weight: 700;
-`;
 
-export const ManageAddressNav = styled.div`
-    font-size: 0.95rem;
-    font-weight: 600;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    cursor: pointer;
+    @media (${device.desktop}) {
+        font-size: 37px;
+    }
 `;
 
 export const AddAddressForm = styled.form`
@@ -91,8 +92,12 @@ export const AddAddressForm = styled.form`
 
 export const AddressContainer = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 2rem;
     flex-wrap: wrap;
     width: 100%;
+
+    @media (${device.desktop}) {
+        flex-direction: row;
+    }
 `;
