@@ -5,10 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import { ProductContainer } from "../componets/style/Product.style";
 import { useState } from "react";
 import { useCart } from "../hooks/useCart";
+import GoBackNav from "../componets/GoBackNav/GoBackNav";
 
 const Product = () => {
     const { id } = useParams<{ id: string }>();
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState<string>("1");
     const [activeIndex, setActiveIndex] = useState(0);
     const navigate = useNavigate();
     const { addToCart } = useCart();
@@ -44,11 +45,11 @@ const Product = () => {
     };
 
     const handleAddToCart = () => {
-        if (quantity > product.stock) {
-            alert(`Only ${product.stock} left in stock`);
-            return;
-        }
-        addToCart({ productId: product._id, quantity: quantity });
+        // if (quantity > product.stock) {
+        //     alert(`Only ${product.stock} left in stock`);
+        //     return;
+        // }
+        addToCart({ productId: product._id, quantity: Number(quantity) });
         navigate("/cart");
     };
 
@@ -57,8 +58,22 @@ const Product = () => {
         navigate("/checkout");
     };
 
+    const handleOnChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuantity(e.target.value); // allow empty string
+    };
+
+    const handleOnBlurQuantity = () => {
+        let val = Number(quantity);
+        if (isNaN(val) || val < 1) {
+            setQuantity("1");
+        } else {
+            setQuantity(String(val));
+        }
+    };
+
     return (
         <ProductContainer>
+            <GoBackNav text="Back" onBack={() => navigate(-1)} />
             <div className="product-images-container">
                 {/* Main Slider */}
                 <div className="product-images-container-slider">
@@ -97,15 +112,15 @@ const Product = () => {
                         </div>
                     ))}
                 </div>
-                <div className="product-images-description-container">
+                {/* <div className="product-images-description-container">
                     <h1 className="product-images-description-title">
                         Descripition
                     </h1>
                     <p className="product-images-description-text">
                         {product.description}
                     </p>
-                </div>
-                <div className="frequently-questions-container">
+                </div> */}
+                {/* <div className="frequently-questions-container">
                     <h1 className="frequently-questions-container-title">
                         Frequently asked question
                     </h1>
@@ -146,8 +161,9 @@ const Product = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
+
             <div className="product-info-container">
                 <div className="product-info-text-wrapper">
                     <h1 className="product-info-title-text">{product.title}</h1>
@@ -156,9 +172,9 @@ const Product = () => {
                     </p>
                 </div>
                 <div className="product-info-text-wrapper">
-                    <p className="product-info-delivery-text">
+                    {/* <p className="product-info-delivery-text">
                         Delivery in 1-3 days
-                    </p>
+                    </p> */}
                     <div className="product-info-price-wrapper">
                         <p className="product-info-price">{product.price}</p>
                         <p className="product-info-compare-price">
@@ -172,10 +188,10 @@ const Product = () => {
                             className="product-quantity-input"
                             type="number"
                             min={1}
+                            disabled={product.stock === 0}
                             value={quantity}
-                            onChange={(e) =>
-                                setQuantity(Number(e.target.value))
-                            }
+                            onChange={handleOnChangeQuantity}
+                            onBlur={handleOnBlurQuantity}
                         />
                         <button
                             className="product-add-to-cart-btn"
@@ -189,7 +205,7 @@ const Product = () => {
                         Buy it now
                     </button>
                 </div>
-                <div>
+                {/* <div>
                     <div>
                         <p>Susainable Design</p>
                         <div>
@@ -213,7 +229,7 @@ const Product = () => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </ProductContainer>
     );

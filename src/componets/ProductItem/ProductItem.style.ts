@@ -150,7 +150,7 @@ export const ProductItemBodyWrapper = styled.div<{ view: "grid" | "list" }>`
         gap: 0.5rem;
         align-items: flex-end;
         flex-direction: ${({ view }) => (view === "grid" ? "row" : "column")};
-        justify-content: center;
+        justify-content: flex-end;
         .product-item-icon-btn {
             border: none;
             background: black;
