@@ -16,7 +16,7 @@ import TableRowsIcon from "@mui/icons-material/TableRows";
 import TableRowsOutlinedIcon from "@mui/icons-material/TableRowsOutlined";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import type { IProduct } from "../types/Product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductItem from "../componets/ProductItem/ProductItem";
 
 const ProductList = ({
@@ -33,6 +33,16 @@ const ProductList = ({
     products: IProduct[];
 }) => {
     const [view, setView] = useState<"grid" | "list">("grid");
+
+    useEffect(() => {
+        const savedView = localStorage.getItem("view") || "grid";
+        setView(savedView === "list" ? "list" : "grid");
+    }, []);
+
+    const changeView = (view: "grid" | "list") => {
+        setView(view);
+        localStorage.setItem("view", view);
+    };
 
     return (
         <ProductListSection>
@@ -79,7 +89,7 @@ const ProductList = ({
                         <div className="product-list-filter-top">
                             <div className="product-list-filter-top-view">
                                 <ProductListFilterTopBtnText
-                                    onClick={() => setView("grid")}
+                                    onClick={() => changeView("grid")}
                                     active={view === "grid"}>
                                     {view === "grid" ? (
                                         <WindowIcon />
@@ -88,7 +98,7 @@ const ProductList = ({
                                     )}
                                 </ProductListFilterTopBtnText>
                                 <ProductListFilterTopBtnText
-                                    onClick={() => setView("list")}
+                                    onClick={() => changeView("list")}
                                     active={view === "list"}>
                                     {view === "list" ? (
                                         <TableRowsIcon />
@@ -97,12 +107,12 @@ const ProductList = ({
                                     )}
                                 </ProductListFilterTopBtnText>
                             </div>
-                            <div className="product-list-filter-top-btn">
+                            {/* <div className="product-list-filter-top-btn">
                                 <p className="product-list-filter-top-btn-text">
                                     Best selling
                                 </p>
                                 <ArrowDropDownOutlinedIcon />
-                            </div>
+                            </div> */}
                         </div>
                     </ProductListFilterTopWrapper>
                     <ProductListContainer view={view}>

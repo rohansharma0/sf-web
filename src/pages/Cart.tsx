@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router";
+import GoBackNav from "../componets/GoBackNav/GoBackNav";
 import { CartContainer } from "../componets/style/Cart.style";
 import { useCart } from "../hooks/useCart";
 const Cart = () => {
+    const navigate = useNavigate();
+
     const {
         cartWithItemTotals,
         isLoading,
@@ -32,6 +36,7 @@ const Cart = () => {
                 style={{
                     display: "flex",
                     gap: "2rem",
+                    flexDirection: "column",
                 }}>
                 <div
                     style={{
@@ -40,7 +45,10 @@ const Cart = () => {
                         flexDirection: "column",
                         gap: "2rem",
                     }}>
-                    <div>Continue shopping</div>
+                    <GoBackNav
+                        text="Continue shopping"
+                        onBack={() => navigate(-1)}
+                    />
                     <div>
                         {cartWithItemTotals?.map((cartItem) => {
                             return (
@@ -68,17 +76,17 @@ const Cart = () => {
                         flexDirection: "column",
                         gap: "1rem",
                     }}>
-                    <div
+                    {/* <div
                         style={{
                             padding: "1rem 0",
                         }}>
                         Discount code
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                         <p>Shipped today? Order within : </p>
                         <p>Easy and fast checkout options</p>
                         <p>Great for convincing your visitors</p>
-                    </div>
+                    </div> */}
                     <div
                         style={{
                             display: "flex",
