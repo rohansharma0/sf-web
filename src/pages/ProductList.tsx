@@ -14,7 +14,6 @@ import WindowIcon from "@mui/icons-material/Window";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import TableRowsOutlinedIcon from "@mui/icons-material/TableRowsOutlined";
-import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import type { IProduct } from "../types/Product";
 import { useEffect, useState } from "react";
 import ProductItem from "../componets/ProductItem/ProductItem";
