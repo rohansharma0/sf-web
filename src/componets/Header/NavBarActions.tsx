@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import {
     SearchOutlined,
     ShoppingCartOutlined,
@@ -13,7 +13,6 @@ const NavBarActions = () => {
     const { isAuthenticated } = useAuth();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const navigate = useNavigate();
 
     // Close dropdown on outside click
     useEffect(() => {
