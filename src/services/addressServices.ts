@@ -1,5 +1,3 @@
-import type { APIResponse } from "../types/APIResponse";
-import { HttpStatusCode } from "axios";
 import type { IAddress } from "../types/Address";
 import { axiosInstance } from "../utils/axiosInstance";
 
@@ -7,44 +5,30 @@ const ADDRESS_API_URL = import.meta.env.VITE_BACKEND_URL + "/addresses";
 
 export const addressService = {
     getAllAddresses: async () => {
-        const res = await axiosInstance.get<APIResponse<IAddress[]>>(
-            `${ADDRESS_API_URL}/`
-        );
-        if (res.data.code === HttpStatusCode.Ok) {
-            return res.data.data;
-        }
-        return [];
+        const res = await axiosInstance.get<IAddress[]>(`${ADDRESS_API_URL}/`);
+        return res.data;
     },
 
     addAddress: async (address: IAddress) => {
-        const res = await axiosInstance.post<APIResponse<IAddress>>(
+        const res = await axiosInstance.post<IAddress>(
             `${ADDRESS_API_URL}/`,
             address
         );
-        if (res.data.code === HttpStatusCode.Created) {
-            return res.data.data;
-        }
-        return null;
+        return res.data;
     },
 
     updateAddress: async (address: IAddress) => {
-        const res = await axiosInstance.put<APIResponse<IAddress>>(
+        const res = await axiosInstance.put<IAddress>(
             `${ADDRESS_API_URL}/${address._id}`,
             address
         );
-        if (res.data.code === HttpStatusCode.Ok) {
-            return res.data.data;
-        }
-        return null;
+        return res.data;
     },
 
     deleteAddress: async (id: string) => {
-        const res = await axiosInstance.delete<APIResponse<IAddress>>(
+        const res = await axiosInstance.delete<IAddress>(
             `${ADDRESS_API_URL}/${id}`
         );
-        if (res.data.code === HttpStatusCode.Ok) {
-            return true;
-        }
-        return false;
+        return res.data;
     },
 };

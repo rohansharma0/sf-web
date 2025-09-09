@@ -1,116 +1,184 @@
-import { FooterContainer } from "./Footer.style";
+import {
+    FooterContainer,
+    FooterContent,
+    FooterItem,
+    FooterTitle,
+    FooterContentInner,
+    FooterList,
+    FooterListItem,
+    SocialIcons,
+    FooterWrapper,
+    FooterBottom,
+    FooterRights,
+    FooterPayment,
+    FooterTitleText,
+} from "./Footer.style";
+
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import XIcon from "@mui/icons-material/X";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+
 import { Link } from "react-router";
-import { useSystemPreferences } from "../../context/SystemPreferenceContex";
-import { SysPrefConstant } from "../../utils/SysPrefConstant";
+import { PreferenceConstant } from "../../utils/PreferenceConstant";
+import { usePreference } from "../../context/PreferenceContext";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
-    const { getValueByKey, getByGroupId } = useSystemPreferences();
+    const { getValueByKey, getByGroupId } = usePreference();
 
-    const logoURL = getValueByKey(SysPrefConstant.APP_LOGO);
-    const instagramUrl = getValueByKey(SysPrefConstant.INSTAGRAM_URL);
-    const facebookUrl = getValueByKey(SysPrefConstant.FACEBOOK_URL);
-    const pinterestUrl = getValueByKey(SysPrefConstant.PINTEREST_URL);
-    const twitterUrl = getValueByKey(SysPrefConstant.TWITTER_URL);
+    const logoURL = getValueByKey(PreferenceConstant.APP_LOGO);
+    const instagramUrl = getValueByKey(PreferenceConstant.INSTAGRAM_URL);
+    const facebookUrl = getValueByKey(PreferenceConstant.FACEBOOK_URL);
+    const pinterestUrl = getValueByKey(PreferenceConstant.PINTEREST_URL);
+    const twitterUrl = getValueByKey(PreferenceConstant.TWITTER_URL);
     const footerCopyrightText = getValueByKey(
-        SysPrefConstant.FOOTER_COPYRIGHT_TEXT
+        PreferenceConstant.FOOTER_COPYRIGHT_TEXT
     );
-    const popularCategories = getByGroupId(SysPrefConstant.POPULAR_CATEGORIES);
-    const paymentLogos = getByGroupId(SysPrefConstant.PAYMENT_LOGOS);
+
+    const popularCategories =
+        getByGroupId(PreferenceConstant.POPULAR_CATEGORIES) || [];
+    const paymentLogos = getByGroupId(PreferenceConstant.PAYMENT_LOGOS) || [];
+
+    const [openSections, setOpenSections] = useState<Record<string, boolean>>(
+        {}
+    );
+
+    const toggleSection = (section: string) => {
+        setOpenSections((prev) => ({
+            ...prev,
+            [section]: !prev[section],
+        }));
+    };
+
+    const FooterSection = ({
+        id,
+        title,
+        children,
+    }: {
+        id: string;
+        title: string;
+        children: React.ReactNode;
+    }) => {
+        const isOpenMobile = openSections[id];
+
+        const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+        useEffect(() => {
+            const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
+        }, []);
+
+        const isOpen = isDesktop || isOpenMobile;
+        return (
+            <FooterItem>
+                <FooterTitle
+                    aria-expanded={isOpenMobile}
+                    aria-controls={`section-${id}`}
+                    onClick={() => !isDesktop && toggleSection(id)}>
+                    {title}
+                    <span>{isOpenMobile ? "-" : "+"}</span>
+                </FooterTitle>
+                <FooterContentInner id={`section-${id}`} $isOpen={isOpen}>
+                    {children}
+                </FooterContentInner>
+            </FooterItem>
+        );
+    };
+
+    const PopularCategoriesFooterItem = () => (
+        <FooterSection id="POPULAR" title="Popular category">
+            <FooterList>
+                {popularCategories.map((c) => (
+                    <FooterListItem key={c.key}>
+                        <Link to={`/products/c/${c.key}`}>{c.value}</Link>
+                    </FooterListItem>
+                ))}
+            </FooterList>
+        </FooterSection>
+    );
+
+    const ShopInfoFooterItem = () => (
+        <FooterSection id="SHOP" title="Shop info">
+            <FooterList>
+                <FooterListItem>
+                    <Link to="/contact">Contact</Link>
+                </FooterListItem>
+                <FooterListItem>
+                    <Link to="/faq">FAQ</Link>
+                </FooterListItem>
+                <FooterListItem>
+                    <Link to="/about">About us</Link>
+                </FooterListItem>
+            </FooterList>
+        </FooterSection>
+    );
+
+    const SupportFooterItem = () => (
+        <FooterSection id="SUPPORT" title="Information">
+            <FooterList>
+                <FooterListItem>
+                    <Link to="/shipping">Shipping</Link>
+                </FooterListItem>
+                <FooterListItem>
+                    <Link to="/policy">Refunds & Returns</Link>
+                </FooterListItem>
+            </FooterList>
+        </FooterSection>
+    );
+
+    const FollowFooterItem = () => (
+        <FooterItem>
+            <FooterTitleText>Follow us</FooterTitleText>
+            <SocialIcons>
+                <a href={instagramUrl}>
+                    <InstagramIcon fontSize="small" />
+                </a>
+                <a href={pinterestUrl}>
+                    <PinterestIcon fontSize="small" />
+                </a>
+                <a href={twitterUrl}>
+                    <XIcon fontSize="small" />
+                </a>
+                <a href={facebookUrl}>
+                    <FacebookRoundedIcon fontSize="small" />
+                </a>
+            </SocialIcons>
+        </FooterItem>
+    );
+
+    const FooterBottomSection = () => (
+        <FooterWrapper>
+            <FooterBottom>
+                <FooterRights>
+                    <img src={logoURL} alt="Logo" height="15" />
+                    <p>{footerCopyrightText}</p>
+                </FooterRights>
+                <FooterPayment>
+                    {paymentLogos.map((logo) => (
+                        <div className="payment-logo" key={logo.key}>
+                            <img
+                                className="payment-img"
+                                src={logo.value}
+                                alt={`Payment Logo ${logo.key}`}
+                            />
+                        </div>
+                    ))}
+                </FooterPayment>
+            </FooterBottom>
+        </FooterWrapper>
+    );
 
     return (
         <FooterContainer>
-            <div className="footer-content">
-                <div className="footer-item">
-                    <h4 className="footer-item-title">Popular</h4>
-                    <ul className="footer-item-ul">
-                        {popularCategories.map((category) => {
-                            return (
-                                <li
-                                    className="footer-item-li"
-                                    key={category.key}>
-                                    <Link to={`/products/c/${category.key}`}>
-                                        {category.value}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-                <div className="footer-item">
-                    <h4 className="footer-item-title">Shop info</h4>
-                    <ul className="footer-item-ul">
-                        <li className="footer-item-li">
-                            <Link to="/contact">Contact</Link>
-                        </li>
-                        <li className="footer-item-li">
-                            <Link to="/about">About us</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="footer-item">
-                    <h4 className="footer-item-title">Support</h4>
-                    <ul className="footer-item-ul">
-                        <li className="footer-item-li">
-                            <Link to="/shipping">Shipping</Link>
-                        </li>
-                        <li className="footer-item-li">
-                            <Link to="/policy">Refunds & Returns</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="footer-item">
-                    <h4 className="footer-item-title">Follow</h4>
-                    <div className="footer-item-social">
-                        <a
-                            href={instagramUrl}
-                            className="footer-item-social-icon">
-                            <InstagramIcon fontSize="small" />
-                        </a>
-                        <a
-                            href={pinterestUrl}
-                            className="footer-item-social-icon">
-                            <PinterestIcon fontSize="small" />
-                        </a>
-                        <a
-                            href={twitterUrl}
-                            className="footer-item-social-icon">
-                            <XIcon fontSize="small" />
-                        </a>
-                        <a
-                            href={facebookUrl}
-                            className="footer-item-social-icon">
-                            <FacebookRoundedIcon fontSize="small" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div className="footer-wrapper">
-                <div className="footer-container">
-                    <div className="footer-rights-container">
-                        <Link to="/">
-                            <img src={logoURL} alt="Logo" height="15" />
-                        </Link>
-                        <p className="footer-rights">{footerCopyrightText}</p>
-                    </div>
-                    <div className="footer-payment">
-                        {paymentLogos.map((paymentLogo) => {
-                            return (
-                                <div className="payment-logo">
-                                    <img
-                                        className="payment-img"
-                                        src={paymentLogo.value}
-                                        alt={paymentLogo.key}
-                                    />
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
+            <FooterContent>
+                <PopularCategoriesFooterItem />
+                <ShopInfoFooterItem />
+                <SupportFooterItem />
+                <FollowFooterItem />
+            </FooterContent>
+            <FooterBottomSection />
         </FooterContainer>
     );
 };

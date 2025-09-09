@@ -1,29 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap");
+
+@import "./styles/colors.css";
+@import "./styles/theme.css";
+@import "./styles/header.css";
+@import "./styles/footer.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-a,
-a:link,
-a:visited,
-a:hover,
-a:active{
-  color: inherit;       /* or a fixed color like #007bff */
-  text-decoration: none; /* optional: removes underline */
+/* Global HTML & Body */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
-button{
-  background: none;
-  border:none;
-  color: inherit;       /* or a fixed color like #007bff */
-  text-decoration: none; /* optional: removes underline */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+h1 { font-size: var(--font-size-xxxl); }
+h2 { font-size: var(--font-size-xxl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+h5 { font-size: var(--font-size-md); }
+h6 { font-size: var(--font-size-sm); }
+
+/* Links */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border-radius: var(--radius-md);
+  border: var(--border-width) var(--border-style) transparent;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+} 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Inputs */
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+

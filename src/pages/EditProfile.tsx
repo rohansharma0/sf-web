@@ -39,7 +39,7 @@ const EditProfile = () => {
         if (Object.keys(errors).length > 0) return;
         try {
             await userService.updateUser(data.name, data.email);
-            navigate(-2);
+            navigate(-1);
         } catch (err) {
             console.error(err);
         } finally {
