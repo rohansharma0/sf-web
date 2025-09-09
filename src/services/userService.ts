@@ -1,6 +1,3 @@
-import { HttpStatusCode } from "axios";
-import type { APIResponse } from "../types/APIResponse";
-
 import { axiosInstance } from "../utils/axiosInstance";
 import type { IUser } from "../types/User";
 import type { IProduct } from "../types/Product";

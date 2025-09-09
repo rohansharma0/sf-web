@@ -1,6 +1,5 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { HeaderContainer, NavBarContainer } from "./Header.style";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -15,9 +14,9 @@ import UserDropdown from "./UserDropdown";
 const MotionHeaderContainer = motion(HeaderContainer);
 
 const Header = () => {
-    const { logout, isAuthenticated } = useAuth();
-    const queryClient = useQueryClient();
-    const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
+    // const queryClient = useQueryClient();
+    // const navigate = useNavigate();
 
     const { getValueByKey } = usePreference();
     const logoURL = getValueByKey(PreferenceConstant.APP_LOGO);
@@ -36,12 +35,12 @@ const Header = () => {
     //     queryFn: () => categoryService.getAllCategories(),
     // });
 
-    const handleLogout = () => {
-        logout();
-        setIsDropdownOpen(false);
-        queryClient.removeQueries({ queryKey: ["wishlist"] });
-        navigate("/");
-    };
+    // const handleLogout = () => {
+    //     logout();
+    //     setIsDropdownOpen(false);
+    //     queryClient.removeQueries({ queryKey: ["wishlist"] });
+    //     navigate("/");
+    // };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
