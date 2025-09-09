@@ -1,4 +1,4 @@
-export const SysPrefConstant = {
+export const PreferenceConstant = {
     APP_LOGO: "APP_LOGO",
     SEARCH_PLACEHOLDER_TEXT: "SEARCH_PLACEHOLDER_TEXT",
     INSTAGRAM_URL: "INSTAGRAM_URL",

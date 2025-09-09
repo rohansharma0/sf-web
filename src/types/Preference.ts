@@ -1,4 +1,4 @@
-export interface ISystemPreference {
+export interface IPreference {
     groupId: string;
     key: string;
     value: string;

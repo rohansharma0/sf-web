@@ -1,0 +1,23 @@
+
+:root {
+    /* Footer */
+    --footer-sm-padding: var(--space-4);
+    --footer-md-padding: var(--space-6);
+    --footer-lg-padding: var(--space-8);
+
+    --footer-bg: var(--color-surface-a05);
+    --footer-sm-rights-bg: var(--color-surface-a05);
+    --footer-md-rights-bg: var(--color-surface-a05);
+    --footer-lg-rights-bg: var(--color-surface-a20);
+
+    --footer-social-icon-color: var(--color-primary-a10);
+    --footer-social-icon-bg: var(--color-surface-a10);
+    --footer-social-icon-hover: var(--color-surface-a20);
+
+    --footer-text: var(--color-text-muted);
+    --footer-link: var(--color-brand-primary);
+}
+
+[data-theme="dark"] {
+
+}

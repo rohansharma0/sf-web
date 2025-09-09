@@ -1,0 +1,35 @@
+
+:root {
+  --header-z-index: var(--z-sticky);
+
+  --header-height-sm: 70px;
+  --header-height-md: 80px;
+  --header-height-lg: 90px;
+
+  --header-background: var(--color-surface-a0);
+  --header-border:var(--color-border);
+  
+
+  --header-sm-padding: var(--space-4);
+  --header-md-padding: var(--space-6);
+  --header-lg-padding: var(--space-8);
+
+  /* Menu Button */
+  --menu-icon-btn-size: 26px;
+  --menu-icon-margin-right: var(--space-4);
+  --menu-line-height:3px;
+  --menu-line-gap:8.5px;
+  --menu-line-width:26px;
+  --menu-line-color:var(--color-black);
+
+  /* Logo */
+  --header-logo-height: 32px;
+
+  /* NavBar Actions*/
+  --nav-actions-gap:var(--space-4);
+  --nav-actions-icon-btn-size: 26px;
+}
+
+[data-theme="dark"] {
+
+}
